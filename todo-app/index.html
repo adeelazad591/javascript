@@ -1,0 +1,187 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>ToDo App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <style>
+    .container {
+      width: 780px;
+      margin: auto;
+      background: #e4e4e4;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    .input-container .input-field {
+      border: none;
+      padding: 8px;
+      width: 600px;
+      box-sizing: border-box;
+      border-radius: 3px;
+    }
+
+    .input-container .input-field:focus {
+      outline: none;
+    }
+
+    .input-container .add-task-btn {
+      width: 100px;
+      height: 32px;
+      background: #989898;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .input-container .add-task-btn:hover {
+      background: #505050;
+    }
+
+    .input-container .add-task-btn:focus {
+      outline: none;
+    }
+
+    .tasklist-container {
+      width: 780px;
+      margin: auto;
+      padding-top: 50px;
+    }
+
+    .tasklist-ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .tasklist-ul li {
+      background: #e4e4e4;
+      padding: 7px;
+      border-bottom: 1px solid #fff;
+      position: relative;
+    }
+
+    .tasklist-ul li:hover {
+      background: #cccccc;
+      cursor: pointer;
+    }
+
+    .crossicon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #989898;
+      padding: 7px 15px;
+      font-weight: bold;
+    }
+
+    .crossicon:hover {
+      background: #F44336;
+      color: #fff;
+    }
+
+    ul li.checked {
+      background: #5f5f5f;
+      color: #fff;
+      text-decoration: line-through;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <h2 style="text-align: center">ToDo App</h2>
+
+  <div class="container">
+
+    <div class="input-container">
+      <input type="text" class="input-field" id="inputfield" placeholder="Task title">
+      <button class="add-task-btn" onclick="addTask()">Add Task</button>
+    </div>
+
+  </div>
+
+  <div class="tasklist-container">
+    <h3>Task List..</h3>
+    <ul class="tasklist-ul">
+      <li>Task 1 is here</li>
+      <li>Task 2 is here</li>
+      <li class="checked">Task 3 is here</li>
+      <li>Task 4 is here</li>
+      <li>Task 5 is here</li>
+    </ul>
+  </div>
+
+  <script>
+    // addTask function
+    function addTask() {
+
+      var li = document.createElement("li");
+      var input = document.querySelector(".input-field").value;
+      var textNode = document.createTextNode(input);
+
+      li.appendChild(textNode);
+
+      if (input === "") {
+        alert('input field is empty');
+      } else {
+        var taskList = document.querySelector(".tasklist-ul");
+        taskList.appendChild(li);
+      }
+      document.querySelector(".input-field").value = "";
+
+      //add cross icon dynamically 
+      var cross = document.createElement("span");
+      var crossIcon = document.createTextNode("x");
+      cross.appendChild(crossIcon);
+      cross.className = "crossicon";
+      li.appendChild(cross);
+
+      //li removed once we clicked on cross icon
+      for (i = 0; i < crossicon.length; i++) {
+        crossicon[i].onclick = function () {
+          var div = this.parentElement;
+          div.style.display = "none";
+        }
+      }
+    }
+
+    //add cross icon dynamically on all LI
+    var allNode = document.getElementsByTagName("li");
+    for (var index = 0; index < allNode.length; index++) {
+      var cross = document.createElement("span");
+      var crossIcon = document.createTextNode("x");
+      cross.appendChild(crossIcon);
+      cross.className = "crossicon"
+      allNode[index].appendChild(cross);
+    }
+
+    //li removed once we clicked on cross icon
+    var crossicon = document.getElementsByClassName("crossicon");
+    for (i = 0; i < crossicon.length; i++) {
+      crossicon[i].onclick = function () {
+        var div = this.parentElement;
+        div.style.display = "none";
+      }
+    }
+
+    //add "checked" class to li
+    var taskList = document.querySelector("ul");
+    taskList.addEventListener('click', function (ev) {
+      if (ev.target.tagName === 'LI') {
+        ev.target.classList.toggle('checked');
+      }
+    }, false);
+  </script>
+</body>
+
+</html>
